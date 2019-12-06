@@ -7,7 +7,7 @@ signale.config({
 
 const httpProxy = require("http-proxy");
 const request = require("request");
-const { getHandlePath, checkData } = require("./utils.js");
+const { getHandlePath, checkData } = require("./check.js");
 
 const target = process.env.proxyHost || "http://localhost:8000";
 const generalPath = process.env.generalPath || "http://localhost:8000";
@@ -33,7 +33,11 @@ function readApiConfig() {
         const data = JSON.parse(body);
         if (data.code === 200) {
           for (const api of data.data) {
-            const handlerData = getHandlePath(api.path, api.rules);
+            const handlerData = getHandlePath(
+              api.path,
+              api.rules,
+              api.dataLinkValids
+            );
             handlerSchemas.push(handlerData);
           }
           interactive.success("加载源数据成功");

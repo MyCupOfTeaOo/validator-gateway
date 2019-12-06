@@ -37,7 +37,7 @@ const testData = [
   }
 ];
 
-const { getHandlePath, checkData } = require("../utils");
+const { getHandlePath, checkData } = require("../check");
 
 const handlerSchemas = [];
 for (const api of testData) {
